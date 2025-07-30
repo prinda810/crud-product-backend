@@ -1,11 +1,14 @@
-# Use official OpenJDK image
+# Use official OpenJDK image as a base
 FROM openjdk:17-jdk-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy the entire project into the container
+# Copy all project files
 COPY . .
+
+# Give execution permission to mvnw
+RUN chmod +x mvnw
 
 # Build the JAR inside the container
 RUN ./mvnw clean package -DskipTests
