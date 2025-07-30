@@ -27,6 +27,11 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeRepository eRepo;
 	
+	
+	@GetMapping("/")
+    public String home() {
+        return "Spring Boot app is running!";
+    }
 	@GetMapping({"/employees"})
 	public List<Employee> getAllEmployees() {
 		return eRepo.findAll();
