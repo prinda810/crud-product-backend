@@ -1,11 +1,14 @@
-# Use official OpenJDK image as a base
+# Use official OpenJDK image
 FROM openjdk:17-jdk-slim
 
-# Set working directory inside container
+# Set working directory
 WORKDIR /app
 
-# Copy built JAR file to container
-COPY target/app.jar app.jar
+# Copy the entire project into the container
+COPY . .
 
-# Run the JAR file
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Build the JAR inside the container
+RUN ./mvnw clean package -DskipTests
+
+# Rename and run the JAR
+CMD ["java", "-jar", "target/springbootrestapi-0.0.1-SNAPSHOT.jar"]
